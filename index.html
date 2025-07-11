@@ -1,63 +1,97 @@
-<style>
-  /* RESET BÁSICO */
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ivo Paolantonio – Producer, Composer, Mixer</title>
 
-  html, body { height: 100%; font-family: 'Helvetica Neue', Arial, sans-serif; color:#fff; }
+  <!-- Font Awesome para los iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  /* HERO */
-  .hero {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background-image: url('https://i.ibb.co/0qGcVQJ/fondo-ivo.jpg'); /* link directo de la imagen */
-    background-size: cover;
-    background-position: center;
-    filter: grayscale(100%);
-  }
+  <style>
+    /* RESET BÁSICO */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* Capa oscura para legibilidad */
-  .hero::before {
-    content:'';
-    position:absolute;
-    inset:0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);
-    z-index: 0;
-  }
+    html, body { height: 100%; font-family: 'Helvetica Neue', Arial, sans-serif; color:#fff; }
 
-  .content {
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:0 20px;
-  }
+    /* HERO */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
 
-  h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 700; color:#f2c94c; letter-spacing:1px; }
-  h2 { font-size: clamp(16px, 3vw, 20px); margin:12px 0 18px; font-weight:600; }
+    /* Capa oscura para legibilidad */
+    .hero::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      background-image: url('https://i.ibb.co/0qGcVQJ/fondo-ivo.jpg'); /* link directo de la imagen */
+      backdrop-filter: blur(2px);
+    }
 
-  .socials a {
-    color:#fff;
-    margin:0 8px;
-    font-size:22px;
-    transition:opacity .2s;
-  }
+    /* CONTENIDO CENTRADO */
+    .content {
+      position: relative;
+      height: 100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:0 20px;
+    }
 
-  .socials a:hover { opacity:0.7; }
+    h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 700; color:#f2c94c; letter-spacing:1px; }
 
-  .playlist {
-    width: min(100%, 420px);
-    margin-top: 28px;
-    border-radius:12px;
-    overflow:hidden;
-    height: 60%;
-  }
+    h2 { font-size: clamp(16px, 3vw, 20px); margin:12px 0 18px; font-weight:600; }
 
-  @media(max-width:500px){
-    .playlist iframe{ height: 352px; }
-  }
-</style>
+    /* ICONOS SOCIALES */
+    .socials a {
+      color:#fff;
+      margin:0 8px;
+      font-size:22px;
+      transition:opacity .2s;
+    }
+    .socials a:hover { opacity:0.7; }
+
+    /* SPOTIFY EMBED */
+    .playlist {
+      width: min(100%, 420px);
+      margin-top: 28px;
+      border-radius:12px;
+      overflow:hidden;
+      height: 60%;
+    }
+
+    /* MOBILE AJUSTES EXTRA */
+    @media(max-width:500px){
+      .playlist iframe{ height: 352px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="content">
+      <h1>IVO PAOLANTONIO</h1>
+      <h2>PRODUCTOR. COMPOSITOR. MIXER.</h2>
+
+      <div class="socials">
+        <a href="https://open.spotify.com/user/tuusuario" target="_blank" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+        <a href="https://instagram.com/tuusuario" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+
+      <div class="playlist">
+      <iframe style="border:none;width:100%;height:100%;" src="https://open.spotify.com/embed/playlist/3aUy6nrtYQJ7GoSMb8DbVH?utm_source=generator"
+    loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      </div>
+
+      <a href="mailto:thesoundofivo@gmail.com" style="color: #fff; text-decoration: none; margin-top: 20px; display: inline-block; font-weight: bold;">CONTACTO</a>
+
+    </div>
+  </section>
+
+</body>
+</html>
+
