@@ -1,95 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IVO – Music Producer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ivo Paolantonio – Producer, Composer, Mixer</title>
+
+  <!-- Font Awesome para los iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* RESET BÁSICO */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      font-family: 'Helvetica Neue', sans-serif;
-      background-color: #000;
-      color: #fff;
-    }
+    html, body { height: 100%; font-family: 'Helvetica Neue', Arial, sans-serif; color:#fff; }
 
-    header {
-      position: absolute;
-      width: 100%;
-      padding: 20px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 10;
-    }
-
-    header nav a {
-      color: white;
-      margin-left: 20px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
+    /* HERO */
     .hero {
+      position: relative;
       width: 100%;
       height: 100vh;
-      background: url('FOTO.jpg') center center / cover no-repeat;
+      background: url('Ivo produciendo con Euge de fondo.jpg') center/cover no-repeat;
     }
 
-    .info {
-      padding: 40px 20px;
-      background-color: black;
-      max-width: 800px;
-      margin: auto;
+    /* Capa oscura para legibilidad */
+    .hero::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      backdrop-filter: blur(2px);
     }
 
-    .info p {
-      margin-bottom: 12px;
-      line-height: 1.6;
+    /* CONTENIDO CENTRADO */
+    .content {
+      position: relative;
+      height: 100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:0 20px;
     }
 
-    .info a {
-      color: white;
-      text-decoration: underline;
+    h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 700; color:#f2c94c; letter-spacing:1px; }
+
+    h2 { font-size: clamp(16px, 3vw, 20px); margin:12px 0 18px; font-weight:600; }
+
+    /* ICONOS SOCIALES */
+    .socials a {
+      color:#fff;
+      margin:0 8px;
+      font-size:22px;
+      transition:opacity .2s;
+    }
+    .socials a:hover { opacity:0.7; }
+
+    /* SPOTIFY EMBED */
+    .playlist {
+      width: min(100%, 420px);
+      margin-top: 28px;
+      border-radius:12px;
+      overflow:hidden;
     }
 
-    @media screen and (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px;
-      }
-
-      header nav {
-        margin-top: 10px;
-      }
-
-      header nav a {
-        margin: 0 10px 0 0;
-      }
-
-      .info {
-        padding: 30px 15px;
-      }
+    /* MOBILE AJUSTES EXTRA */
+    @media(max-width:500px){
+      .playlist iframe{ height: 352px; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div><strong>IVO</strong></div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Portfolio</a>
-      <a href="#">English</a>
-    </nav>
-  </header>
+  <section class="hero">
+    <div class="content">
+      <h1>IVO PAOLANTONIO</h1>
+      <h2>PRODUCER. COMPOSITOR. MIXER.</h2>
 
-  <div class="hero"></div>
+      <div class="socials">
+        <a href="https://open.spotify.com/user/tuusuario" target="_blank" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+        <a href="https://instagram.com/tuusuario" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
 
-  <div class="info">
-    <p><strong>Producción musical
+      <div class="playlist">
+        <iframe style="border:none;width:100%;height:100%;" src="https://open.spotify.com/embed/playlist/3aUy6nrtYQJ7GoSMb8DbVH?utm_source=generator"
+          loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
