@@ -13,82 +13,38 @@
       color: #fff;
       background: #000;
     }
-    section { padding: 60px 20px; max-width: 1000px; margin: auto; }
 
-    /* HERO con video */
+    section { 
+      padding: 40px 20px; 
+      max-width: 1000px; 
+      margin: auto; 
+    }
+
+    /* HERO estilo home */
     .hero {
       position: relative;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      overflow: hidden;
     }
-    .hero video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: -1;
-      filter: brightness(0.4);
-    }
-    .hero-content {
-      z-index: 1;
-      max-width: 700px;
-      padding: 0 20px;
-    }
+
     .hero h1 {
-      font-size: clamp(36px, 6vw, 64px);
-      color: #f2c94c;
+      font-size: clamp(32px, 5vw, 48px);
       font-weight: 700;
-      margin-bottom: 16px;
-    }
-    .hero p {
-      font-size: clamp(16px, 2.5vw, 22px);
-      line-height: 1.4;
-      margin-bottom: 24px;
-    }
-    .cta-btn {
-      background: #f2c94c;
-      color: #000;
-      padding: 14px 28px;
-      border-radius: 6px;
-      font-weight: bold;
-      text-decoration: none;
-      display: inline-block;
-      transition: background 0.2s;
-    }
-    .cta-btn:hover { background: #d6aa2f; }
-
-    /* Sección experiencia */
-    .experience {
-      text-align: center;
-    }
-    .experience h2 {
-      font-size: clamp(24px, 4vw, 36px);
-      margin-bottom: 20px;
       color: #f2c94c;
-    }
-    .experience p {
-      max-width: 800px;
-      margin: auto;
-      font-size: 18px;
-      line-height: 1.5;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
     }
 
-    /* Audio antes/después */
-    .audio-section {
-      text-align: center;
-      margin-top: 40px;
+    .hero h2 {
+      font-size: clamp(16px, 3vw, 20px);
+      font-weight: 600;
+      margin-bottom: 20px;
     }
-    .audio-section h3 { margin-bottom: 16px; }
 
-    /* Redes */
-    .socials {
-      text-align: center;
-      margin-top: 40px;
-    }
     .socials a {
       color: #fff;
       margin: 0 8px;
@@ -96,23 +52,74 @@
       transition: opacity 0.2s;
     }
     .socials a:hover { opacity: 0.7; }
+
+    iframe.spotify {
+      border-radius: 12px;
+      margin-top: 20px;
+      width: min(100%, 420px);
+      height: 352px;
+    }
+
+    .cta-btn {
+      background: #f2c94c;
+      color: #000;
+      padding: 12px 26px;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+      transition: background 0.2s;
+    }
+    .cta-btn:hover { background: #d6aa2f; }
+
+    /* Títulos de secciones */
+    h2.section-title {
+      font-size: clamp(24px, 4vw, 36px);
+      color: #f2c94c;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    p.section-text {
+      max-width: 800px;
+      margin: auto;
+      font-size: 18px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* Audio antes/después */
+    .audio-section {
+      text-align: center;
+    }
+    .audio-section audio {
+      display: block;
+      margin: 12px auto;
+    }
   </style>
 </head>
 <body>
 
-  <!-- HERO con video -->
+  <!-- HERO -->
   <section class="hero">
-      <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/artist/6CFMZMSvQBeozuwyZLQe9z?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-  </section>
-  
-  <section>
-  <a class="cta-btn" href="https://wa.me/549XXXXXXXXXX" target="_blank">Trabajemos juntos</a>
+    <h1>IVO PAOLANTONIO</h1>
+    <h2>PRODUCTOR. COMPOSITOR. MIXER.</h2>
+
+    <div class="socials">
+      <a href="https://open.spotify.com/artist/6CFMZMSvQBeozuwyZLQe9z" target="_blank"><i class="fab fa-spotify"></i></a>
+      <a href="https://www.instagram.com/ivosoyivo/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:thesoundofivo@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <iframe class="spotify" src="https://open.spotify.com/embed/artist/6CFMZMSvQBeozuwyZLQe9z?utm_source=generator" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+    <a href="mailto:thesoundofivo@gmail.com" class="cta-btn">Trabajemos juntos</a>
   </section>
 
   <!-- EXPERIENCIA -->
-  <section class="experience">
-    <h2>El viaje creativo</h2>
-    <p>
+  <section>
+    <h2 class="section-title">El viaje creativo</h2>
+    <p class="section-text">
       Cada canción es una historia. Trabajo con vos para encontrar su esencia, explorar sonidos que te representen y llevar tu idea a un lugar donde la sientas completa. 
       No es sólo producción: es co-creación, es encontrar tu voz, es transformar una chispa en algo que pueda quedarse para siempre.
     </p>
@@ -120,25 +127,14 @@
 
   <!-- ANTES Y DESPUÉS -->
   <section class="audio-section">
-    <h3>Escuchá la transformación</h3>
-    <p>Un fragmento crudo convertido en una canción terminada.</p>
+    <h2 class="section-title">Escuchá la transformación</h2>
+    <p class="section-text">Un fragmento crudo convertido en una canción terminada.</p>
     <audio controls>
       <source src="audio-antes.mp3" type="audio/mpeg">
     </audio>
     <audio controls>
       <source src="audio-despues.mp3" type="audio/mpeg">
     </audio>
-  </section>
-
-  <!-- REDES -->
-  <section class="socials">
-    <a href="https://open.spotify.com/artist/6CFMZMSvQBeozuwyZLQe9z" target="_blank"><i class="fab fa-spotify"></i></a>
-    <a href="https://www.instagram.com/ivosoyivo/" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="mailto:thesoundofivo@gmail.com"><i class="fas fa-envelope"></i></a>
-  </section>
-
-  <section>
-  <a class="cta-btn" href="https://wa.me/549XXXXXXXXXX" target="_blank">Trabajemos juntos</a>
   </section>
 
 </body>
