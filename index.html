@@ -1,460 +1,421 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<html lang="en">
-   
-   
-    <head>
-       
-       
-        <!-- META -->
-        <meta charset="utf-8">
-        <meta name="robots" content="noodp">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-       
-        <!-- PAGE TITLE -->
-        <title>Miller - Identity</title>
-       
-        <!-- FAVICON -->
-        <link rel="shortcut icon" href="assets/img/favicon.png">
-       
-        <!-- FONTS -->
-        <link href="https://fonts.googleapis.com/css?family=Abril+Fatface%7CArapey&amp;subset=latin-ext" rel="stylesheet">
-       
-        <!-- STYLESHEETS -->
-        <link rel="stylesheet" type="text/css" href="assets/css/plugins.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-        
-        
-    </head>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-   
-    <body>
-    
-       
-        <!-- PRELOADER -->
-        <div class="preloader">
-           
-            <div class="spinner"></div>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 60px 0 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+        }
+
+        .producer-name {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ffffff, #888888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .producer-title {
+            font-size: 1.2rem;
+            color: #888888;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Discography Section */
+        .discography {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+
+        .albums-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .album-card {
+            background: #111111;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 1px solid #222222;
+            position: relative;
+        }
+
+        .album-card:hover {
+            transform: translateY(-10px);
+            border-color: #333333;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .album-cover {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #333333, #1a1a1a);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .album-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.1) 0%, 
+                rgba(255,255,255,0.05) 50%, 
+                rgba(0,0,0,0.1) 100%);
+            z-index: 2;
+        }
+
+        .album-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .album-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: #444444;
+            z-index: 1;
+            display: none;
+        }
+
+        .album-cover.no-image .album-placeholder {
+            display: block;
+        }
+
+        .album-info {
+            padding: 25px;
+        }
+
+        .album-title {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .album-year {
+            color: #888888;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 3;
+        }
+
+        .album-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #1db954;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            background: #1ed760;
+            transform: scale(1.1);
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-left: 20px solid #000000;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 4px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0 60px;
+            text-align: center;
+            border-top: 1px solid #222222;
+        }
+
+        .contact-text {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .contact-email {
+            font-size: 1.3rem;
+            color: #ffffff;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            display: inline-block;
+            font-weight: 400;
+        }
+
+        .contact-email:hover {
+            color: #1db954;
+            border-bottom-color: #1db954;
+        }
+
+        .social-text {
+            font-size: 1rem;
+            color: #888888;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .instagram-link {
+            font-size: 1.1rem;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 400;
+        }
+
+        .instagram-link:hover {
+            color: #E4405F;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .producer-name {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
             
+            .albums-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 30px;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .producer-name {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+            
+            .albums-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="producer-name">Ivo</h1>
+            <p class="producer-title">PRODUCTOR MUSICAL</p>
         </div>
-        <!-- /PRELOADER -->
-    
-        
-        <!-- IMAGE CONTAINER -->
-        <div class="image-container">
-           
-            <div class="background-img"></div>
-
-        </div>
-        <!-- /IMAGE CONTAINER -->
-
-
-        <!-- CONTENT AREA -->
-        <div class="content-area">
-
-
-            <!-- CONTENT AREA INNER --> 
-            <div class="content-area-inner">
-
-
-                <!-- INTRO -->
-                <section id="intro">
-
-
-                    <!-- CONTAINER MID -->
-                    <div class="container-mid">
-
-                       
-                        <!-- ANIMATION CONTAINER -->
-                        <div class="animation-container animation-fade-down" data-animation-delay="0">
-                        
-                            <h1>I’m John Miller,</h1>
-                        
-                        </div>
-                        <!-- /ANIMATION CONTAINER -->
-                        
-                        
-                        <!-- ANIMATION CONTAINER -->
-                        <div class="animation-container animation-fade-left" data-animation-delay="300">
-                           
-                            <p class="subline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc condimentum lacinia molestie. Phasellus vehicula ornare odio, blandit commodo nisl dapibus vel. Sed vel fermentum elit.</p>
-                            
-                        </div>
-                        <!-- /ANIMATION CONTAINER -->
-                        
-                        
-                        <!-- ANIMATION CONTAINER -->
-                        <div class="animation-container animation-fade-up" data-animation-delay="600">
-                           
-                            <a href="#about" class="smooth-scroll">Learn More<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                            
-                        </div>
-                        <!-- /ANIMATION CONTAINER -->
-
-
-                    </div>
-                    <!-- /CONTAINER MID -->
-
-
-                </section>
-                <!-- /INTRO -->
-
-
-                <!-- ABOUT -->
-                <section id="about">
-
-
-                    <h3 class="headline scroll-animated-from-right">Why I can help you.</h3>
-                    
-                    <p class="scroll-animated-from-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper faucibus eros, quis imperdiet sapien. Nam sodales nec risus nec interdum. Proin lobortis, ex condimentum ultricies eleifend, nisl nunc sollicitudin odio, eget egestas est turpis et metus. In non ligula quis mauris rutrum porta.</p>
-
-                    <p class="scroll-animated-from-right">Duis consectetur massa sit amet nibh rhoncus, at pharetra ligula aliquet. Ut ac velit vestibulum, eleifend diam ut, malesuada nisi. Sed vel felis vitae diam luctus commodo. Nunc ipsum est, vulputate id orci ac, luctus consectetur sapien.</p>
-
-
-                </section>
-                <!-- /ABOUT -->
-                
-                
-                <!-- SERVICE -->
-                <section id="service">
-
-
-                    <h3 class="headline scroll-animated-from-right">What I can do for you.</h3>
-                    
-                    
-                    <!-- SERVICE LIST -->
-                    <ul class="services-list">
-                       
-                       
-                        <li class="scroll-animated-from-right"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Concept & Strategy</li>
-                        <li class="scroll-animated-from-right"><i class="fa fa-eye" aria-hidden="true"></i>Design Direction</li>
-                        <li class="scroll-animated-from-right"><i class="fa fa-database" aria-hidden="true"></i>Product Design</li>
-                        <li class="scroll-animated-from-right"><i class="fa fa-television" aria-hidden="true"></i>Web Design</li>
-                        <li class="scroll-animated-from-right"><i class="fa fa-square-o" aria-hidden="true"></i>UI & UX Design</li>
-                        
-                        
-                    </ul>
-                    <!-- /SERVICE LIST -->
-
-
-                </section>
-                <!-- /SERVICE -->
-                
-                
-                <!-- WORK -->
-                <section id="work">
-
-
-                    <h3 class="headline scroll-animated-from-right">My latest Work.</h3>
-                    
-                    
-                    <!-- SHOWCASE -->
-                    <div class="showcase">
-                       
-                       
-                        <!-- ITEM -->
-                        <div class="item scroll-animated-from-right">
-                          
-                          
-                            <!-- LIGHTBOX LINK -->
-                            <a href="#" data-featherlight="#item-1-lightbox">
-                            
-                            
-                                <!-- INFO -->
-                                <div class="info">
-
-
-                                    <!-- CONTAINER MID -->
-                                    <div class="container-mid">
-
-                                        <h5>Fashion Inc.</h5>
-                                        <p>Web Design</p>
-
-                                    </div>
-                                    <!-- /CONTAINER MID -->
-
-
-                                </div>
-                                <!-- /INFO -->
-
-
-                                <div class="background-image" style="background-image: url(assets/img/work/item-1.jpg)"></div>
-
-                           
-                            </a>
-                            <!-- /LIGHTBOX LINK -->
-                            
-                            
-                            <!-- LIGHTBOX -->
-                            <div id="item-1-lightbox" class="work-lightbox">
-                               
-                               
-                                <img class="img-responsive" src="assets/img/work/item-1.jpg" alt="image">
-                                
-                                <h3>Fashion Inc.</h3>
-                                <p class="subline">Web Design</p>
-                                
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper faucibus eros, quis imperdiet sapien. Nam sodales nec risus nec interdum. Proin lobortis, ex condimentum ultricies eleifend, nisl nunc sollicitudin odio, eget egestas est turpis et metus. In non ligula quis mauris rutrum porta.</p>
-                                
-                                
-                            </div>
-                            <!-- /LIGHTBOX -->
-                            
-                            
-                        </div>
-                        <!-- /ITEM -->
-                        
-                        
-                        <!-- ITEM -->
-                        <div class="item scroll-animated-from-right">
-                          
-                          
-                            <!-- LIGHTBOX LINK -->
-                            <a href="#" data-featherlight="#item-2-lightbox">
-                            
-                            
-                                <!-- INFO -->
-                                <div class="info">
-
-
-                                    <!-- CONTAINER MID -->
-                                    <div class="container-mid">
-
-                                        <h5>Asimov 71</h5>
-                                        <p>Product Design</p>
-
-                                    </div>
-                                    <!-- /CONTAINER MID -->
-
-
-                                </div>
-                                <!-- /INFO -->
-
-
-                                <div class="background-image" style="background-image: url(assets/img/work/item-2.jpg)"></div>
-
-                           
-                            </a>
-                            <!-- /LIGHTBOX LINK -->
-                            
-                            
-                            <!-- LIGHTBOX -->
-                            <div id="item-2-lightbox" class="work-lightbox">
-                               
-                               
-                                <img class="img-responsive" src="assets/img/work/item-2.jpg" alt="image">
-                                
-                                <h3>Asimov 71</h3>
-                                <p class="subline">Product Design</p>
-                                
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper faucibus eros, quis imperdiet sapien. Nam sodales nec risus nec interdum. Proin lobortis, ex condimentum ultricies eleifend, nisl nunc sollicitudin odio, eget egestas est turpis et metus. In non ligula quis mauris rutrum porta.</p>
-                                
-                                
-                            </div>
-                            <!-- /LIGHTBOX -->
-                            
-                            
-                        </div>
-                        <!-- /ITEM -->
-                        
-                        
-                        <!-- ITEM -->
-                        <div class="item scroll-animated-from-right">
-                          
-                          
-                            <!-- LIGHTBOX LINK -->
-                            <a href="#" data-featherlight="#item-3-lightbox">
-                            
-                            
-                                <!-- INFO -->
-                                <div class="info">
-
-
-                                    <!-- CONTAINER MID -->
-                                    <div class="container-mid">
-
-                                        <h5>Hardley &amp; Sons</h5>
-                                        <p>Design Direction</p>
-
-                                    </div>
-                                    <!-- /CONTAINER MID -->
-
-
-                                </div>
-                                <!-- /INFO -->
-
-
-                                <div class="background-image" style="background-image: url(assets/img/work/item-3.jpg)"></div>
-
-                           
-                            </a>
-                            <!-- /LIGHTBOX LINK -->
-                            
-                            
-                            <!-- LIGHTBOX -->
-                            <div id="item-3-lightbox" class="work-lightbox">
-                               
-                               
-                                <img class="img-responsive" src="assets/img/work/item-3.jpg" alt="image">
-                                
-                                <h3>Hardley &amp; Sons</h3>
-                                <p class="subline">Design Direction</p>
-                                
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper faucibus eros, quis imperdiet sapien. Nam sodales nec risus nec interdum. Proin lobortis, ex condimentum ultricies eleifend, nisl nunc sollicitudin odio, eget egestas est turpis et metus. In non ligula quis mauris rutrum porta.</p>
-                                
-                                
-                            </div>
-                            <!-- /LIGHTBOX -->
-                            
-                            
-                        </div>
-                        <!-- /ITEM -->
-                        
-                        
-                        <!-- ITEM -->
-                        <div class="item scroll-animated-from-right">
-                          
-                          
-                            <!-- LIGHTBOX LINK -->
-                            <a href="#" data-featherlight="#item-4-lightbox">
-                            
-                            
-                                <!-- INFO -->
-                                <div class="info">
-
-
-                                    <!-- CONTAINER MID -->
-                                    <div class="container-mid">
-
-                                        <h5>Starnation</h5>
-                                        <p>UI/UX DESIGN</p>
-
-                                    </div>
-                                    <!-- /CONTAINER MID -->
-
-
-                                </div>
-                                <!-- /INFO -->
-
-
-                                <div class="background-image" style="background-image: url(assets/img/work/item-4.jpg)"></div>
-
-                           
-                            </a>
-                            <!-- /LIGHTBOX LINK -->
-                            
-                            
-                            <!-- LIGHTBOX -->
-                            <div id="item-4-lightbox" class="work-lightbox">
-                               
-                               
-                                <img class="img-responsive" src="assets/img/work/item-4.jpg" alt="image">
-                                
-                                <h3>Starnation</h3>
-                                <p class="subline">UI/UX DESIGN</p>
-                                
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper faucibus eros, quis imperdiet sapien. Nam sodales nec risus nec interdum. Proin lobortis, ex condimentum ultricies eleifend, nisl nunc sollicitudin odio, eget egestas est turpis et metus. In non ligula quis mauris rutrum porta.</p>
-                                
-                                
-                            </div>
-                            <!-- /LIGHTBOX -->
-                            
-                            
-                        </div>
-                        <!-- /ITEM -->
-                        
-                        
-                    </div>
-                    <!-- /SHOWCASE -->
-
-
-                </section>
-                <!-- /WORK -->
-                
-                
-                <!-- CONTACT -->
-                <section id="contact">
-
-
-                    <h3 class="headline scroll-animated-from-right">Contact Me.</h3>
-                    
-                    
-                    <!-- CONTACT LIST -->
-                    <ul class="contact-list">
-                       
-                        <li class="scroll-animated-from-right"><i class="fa fa-mobile" aria-hidden="true"></i>01572 115522</li>
-                        <li class="scroll-animated-from-right"><i class="fa fa-envelope-o" aria-hidden="true"></i>johnmiller@mail.com</li>
-                        
-                    </ul>
-                    <!-- /CONTACT LIST -->
-                    
-                    
-                    <!-- CONTACT FORM --> 
-                    <form id="contact-form" action="assets/php/contact.php" method="post">
-
-                       
-                        <input id="contact-form-name" type="text" name="name" class="form-control scroll-animated-from-right" placeholder="* Your Name">
-                        
-                        <input id="contact-form-email" type="text" name="email" class="form-control scroll-animated-from-right" placeholder="* Your Email">
-                        
-                        <!-- PHANTOM ELEMENT ( HONEYPOT CAPTCHA FOR SECURITY ) -->
-                        <div class="fhp-input"><input id="contact-form-company" type="text" name="company" class="form-control"></div>
-                        <!-- /PHANTOM ELEMENT ( HONEYPOT CAPTCHA FOR SECURITY ) -->
-                        
-                        <textarea id="contact-form-message" name="message" class="form-control scroll-animated-from-right" placeholder="* Your Message"></textarea>
-                        
-                        <button type="submit" class="form-control scroll-animated-from-right">Send Mail</button>
-                        
-                        <div class="success-message">* The Email was Sent Successfully!</div>
-
-                   
-                    </form>
-                    <!-- /CONTACT FORM --> 
-
-
-                </section>
-                <!-- /CONTACT -->
-                
-                
-                <!-- FOOTER -->
-                <section id="footer">
-                
-                   
-                    <!-- SOCIAL ICONS -->
-                    <ul class="social-icons scroll-animated-from-right">
-                       
-                       
-                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                        
-                        
-                    </ul>
-                    <!-- /SOCIAL ICONS -->
-                    
-
-                    <p class="scroll-animated-from-right">© 2017 Your Brand | Design by <a href="https://templatefoundation.com">Template Foundation</a></p>
-
-
-                </section>
-                <!-- /FOOTER -->
-
-
+    </header>
+
+    <main>
+        <section class="discography">
+            <div class="container">
+                <h2 class="section-title">Discografía</h2>
+                <div class="albums-grid" id="albumsGrid">
+                    <!-- Albums will be populated by JavaScript -->
+                </div>
             </div>
-            <!-- /CONTENT AREA INNER -->
+        </section>
+    </main>
 
-
+    <section class="contact">
+        <div class="container">
+            <p class="contact-text">Para trabajar juntos escribir a</p>
+            <a href="mailto:thesoundofivo@gmail.com" class="contact-email">thesoundofivo@gmail.com</a>
+            <br><br>
+            <p class="social-text">Seguime en Instagram</p>
+            <a href="https://instagram.com/ivosoyivo" target="_blank" class="instagram-link">@ivosoyivo</a>
         </div>
-        <!-- /CONTENT AREA -->
-        
-        
-        <!-- JAVASCRIPTS -->
-        <script type="text/javascript" src="assets/js/plugins.js"></script>
-        <script type="text/javascript" src="assets/js/main.js"></script>
-   
-   
-    </body> 
-    
-    
+    </section>
+
+    <script>
+        // Array de álbumes - Aquí puedes agregar tus discos
+        const albums = [
+            {
+                title: "PORNO",
+                year: "2025",
+                coverUrl: "https://i.scdn.co/image/ab67616d0000b27322b1874d0a1f244bef9eab98", // Agrega la ruta de tu imagen aquí
+                spotifyUrl: "https://open.spotify.com/intl-es/album/1mHalLjvDi6HNSgnAX0mLC"
+            },
+            {
+                title: "El Fruto De Nuestro Amor",
+                year: "2025",
+                coverUrl: "https://i.scdn.co/image/ab67616d00001e028d0b6a900e3f3322b8aa8e35", // Agrega la ruta de tu imagen aquí
+                spotifyUrl: "https://open.spotify.com/intl-es/album/1mHalLjvDi6HNSgnAX0mLC"
+            },
+            {
+                title: "La Sustancia",
+                year: "2025",
+                coverUrl: "https://i.scdn.co/image/ab67616d0000b273628c3f029f41201ce0019468", // Agrega la ruta de tu imagen aquí
+                spotifyUrl: "https://open.spotify.com/intl-es/album/1mHalLjvDi6HNSgnAX0mLC"
+            },
+            {
+                title: "Un Ratito De Ti",
+                year: "2025",
+                coverUrl: "https://i.scdn.co/image/ab67616d0000b273188d2788e35f6a3e138cd379", // Agrega la ruta de tu imagen aquí
+                spotifyUrl: "https://open.spotify.com/intl-es/album/1mHalLjvDi6HNSgnAX0mLC"
+            },
+            {
+                title: "Darteló",
+                year: "2025",
+                coverUrl: "https://i.scdn.co/image/ab67616d0000b2736c6f94dcdb1d4f545780c517", // Agrega la ruta de tu imagen aquí
+                spotifyUrl: "https://open.spotify.com/intl-es/album/1mHalLjvDi6HNSgnAX0mLC"
+            },
+            {
+                title: "HIGH",
+                year: "2025",
+                coverUrl: "https://i.scdn.co/image/ab67616d0000b273ece43a2a0edb914bab4d4c8f", // Agrega la ruta de tu imagen aquí
+                spotifyUrl: "https://open.spotify.com/intl-es/album/1mHalLjvDi6HNSgnAX0mLC"
+            },
+            {
+                title: "Volver A Empezar",
+                year: "2025",
+                coverUrl: "https://i.scdn.co/image/ab67616d00001e02917343cb01c09e466460ca0a", // Agrega la ruta de tu imagen aquí
+                spotifyUrl: "https://open.spotify.com/intl-es/album/1mHalLjvDi6HNSgnAX0mLC"
+            },
+            {
+                title: "Después De Tanto",
+                year: "2025",
+                coverUrl: "https://i.scdn.co/image/ab67616d00001e02285c2bc486703aacdecfc4e7", // Agrega la ruta de tu imagen aquí
+                spotifyUrl: "https://open.spotify.com/intl-es/album/4FGumPR1OOgSyQepmEDLpC?si=41H5zGAfTfSEI9IytVeiig"
+            },
+            {
+                title: "Pasarla Bien",
+                year: "2025",
+                coverUrl: "https://i.scdn.co/image/ab67616d0000b2739299c35c6786c82d8dd9bb49", // Agrega la ruta de tu imagen aquí
+                spotifyUrl: "https://open.spotify.com/intl-es/album/03HOtQ0phm6qZOLt6zXryf?si=dLR8T-ZKTXKeA1wDg8nLSQ"
+            },
+            {
+                title: "Si tu supieras",
+                year: "2025",
+                coverUrl: "https://i.scdn.co/image/ab67616d0000b273890a2cfc37cff0019d4d724e", // Agrega la ruta de tu imagen aquí
+                spotifyUrl: "https://open.spotify.com/intl-es/album/5JHKw6ZkSEJQMuEnjda0Em?si=3-QfYtrfSuWJrbZB3VbfIg"
+            }
+        ];
+
+        // Función para crear las tarjetas de álbumes
+        function createAlbumCards() {
+            const albumsGrid = document.getElementById('albumsGrid');
+            
+            albums.forEach(album => {
+                const albumCard = document.createElement('div');
+                albumCard.className = 'album-card';
+                albumCard.onclick = () => window.open(album.spotifyUrl, '_blank');
+                
+                // Crear el cover con o sin imagen
+                const coverContent = album.coverUrl 
+                    ? `<img src="${album.coverUrl}" alt="${album.title} cover" loading="lazy">`
+                    : '';
+                
+                const coverClass = album.coverUrl ? 'album-cover' : 'album-cover no-image';
+                
+                albumCard.innerHTML = `
+                    <div class="${coverClass}">
+                        ${coverContent}
+                        <div class="album-placeholder">♪</div>
+                        <div class="play-overlay">
+                            <div class="play-button">
+                                <div class="play-icon"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="album-info">
+                        <h3 class="album-title">${album.title}</h3>
+                        <p class="album-year">${album.year}</p>
+                    </div>
+                `;
+                
+                albumsGrid.appendChild(albumCard);
+            });
+        }
+
+        // Inicializar cuando se carga la página
+        document.addEventListener('DOMContentLoaded', createAlbumCards);
+
+        // Efecto de parallax sutil en scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            header.style.transform = `translateY(${scrolled * 0.3}px)`;
+        });
+    </script>
+</body>
 </html>
